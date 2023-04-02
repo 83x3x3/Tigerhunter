@@ -3,11 +3,69 @@ using System.Net.NetworkInformation;
 using System.Net.Security;
 using System.Numerics;
 using System.Reflection.Emit;
-
+// Can i write?
 namespace TigerHunter
 {
+	public class Strings
+	{
+		public static string anounceEnter = "시작하려면 엔터를 입력해주세요.";
+		public static void AnounceEnter()
+		{
+			Console.WriteLine($"{anounceEnter}");
+		}
 
-	public class Human
+		public static string anounceIntroductionCharacter = "\n 캐릭터를 선택해주세요 .\n";
+		public static string introductionCharacterDolshoi = "     돌쇠	[1]	\"아씨는 제가 구해오겠구만유!\"";
+		public static string introductionCharacterMadangshoi = "     마당쇠	[2]	\"우리 아부지가 왕년에 범사냥꾼이었지 않것수?\"";
+		public static string introductionCharacterHyangdan = "     향단이	[3]	\"어쩜 좋아... 아가씨는 내가 구해야해...!\"";
+		public static string introductionCharacterSmith = "     스미스	[4]	\"Listen, Listen, I can't listen.\"\n";
+
+		public static void AnounceChoice()
+        {
+            Console.WriteLine($"{anounceIntroductionCharacter}");
+            Console.WriteLine($"{introductionCharacterDolshoi}");
+			Console.WriteLine($"{introductionCharacterMadangshoi}");
+			Console.WriteLine($"{introductionCharacterHyangdan}");
+			Console.WriteLine($"{introductionCharacterSmith}");
+		} //캐릭터 설렉 어나운스
+
+        public static string selectDolshoi = "\n당신의 캐릭터는 돌쇠 입니다.\n";
+        public static string selectMadangshoi = "\n당신의 캐릭터는 마당쇠 입니다.\n";
+        public static string selectHyangdan = "\n당신의 캐릭터는 향단 입니다.\n";
+        public static string selectSmith = "\n당신의 캐릭터는 스미스 입니다.\n";
+        public static void AnounceSelect(int i)
+		{
+			switch (i)
+			{
+                case 1:
+                    Console.WriteLine($"{selectDolshoi}");
+                    break;
+                case 2:
+                    Console.WriteLine($"{selectMadangshoi}");
+                    break;
+                case 3:
+                    Console.WriteLine($"{selectHyangdan}");
+                    break;
+                case 4:
+                    Console.WriteLine($"{selectSmith}");
+                    break;
+                default:
+					break;
+			} //당신의 캐릭터는
+        }
+
+		public static void AnounceGo(int sum)
+		{
+			if (sum == 0)
+				Console.WriteLine($"4 칸 이동합니다.\n");
+			else
+				Console.WriteLine($"{sum} 칸 이동합니다.\n");
+		}
+
+
+	}
+
+    public class Human
 	{
 		public int Hp;
 		public int Mp;
@@ -57,19 +115,19 @@ namespace TigerHunter
 			switch (i)
 			{
 				case 1:
-					Console.WriteLine($"\n당신의 캐릭터는 돌쇠 입니다.\n");
+					Strings.AnounceSelect(i);
 					CreatDolshoi();
 					break;
 				case 2:
-					Console.WriteLine($"\n당신의 캐릭터는 마당쇠 입니다.\n");
+					Strings.AnounceSelect(i);
 					CreatMadangshoi();
 					break;
 				case 3:
-					Console.WriteLine($"\n당신의 캐릭터는 향단이 입니다.\n향단이의 백도는 항상 뒤집혀 있습니다.");
+                    Strings.AnounceSelect(i);
 					CreatHyangdan();
 					break;
 				case 4:
-					Console.WriteLine($"\n당신의 캐릭터는 스미스 입니다.\n");
+                    Strings.AnounceSelect(i);
 					CreatSmith();
 					break;
 				default:
@@ -104,18 +162,9 @@ namespace TigerHunter
 			return 0;
 		} // 엔딩
 
-		static void AnounceChoice()
-		{
-			Console.WriteLine("\n 캐릭터를 선택해주세요 .\n");
-			Console.WriteLine("     돌쇠	[1]	\"아씨는 제가 구해오겠구만유!\"");
-			Console.WriteLine("     마당쇠	[2]	\"우리 아부지가 왕년에 범사냥꾼이었지 않것수?\"");
-			Console.WriteLine("     향단이	[3]	\"어쩜 좋아... 아가씨는 내가 구해야해...!\"");
-			Console.WriteLine("     스미스	[4]	\"Listen, Listen, I can't listen.\"\n");
-		} //캐릭터 설렉 어나운스
-
 		static int Choice()
 		{
-			AnounceChoice();
+			Strings.AnounceChoice();
 
 			String input = Console.ReadLine();
 			switch (input)
@@ -133,15 +182,12 @@ namespace TigerHunter
 			return 0;
 		} // 캐릭터 선택
 
-		static void AnounceEnter()
-		{
-			Console.WriteLine("\n 시작하려면 엔터를 입력해주세요 .\n");
-		} //Enter
 		static void Enter()
 		{
 			while (true)
 			{
-				AnounceEnter();
+				Strings.AnounceEnter();
+				
 				String input = Console.ReadLine();
 				if (input == "")
 					break;
@@ -167,17 +213,43 @@ namespace TigerHunter
 			Random random = new Random((int)DateTime.Now.Ticks + seed);
 
 			Yoots yoots;
-			yoots.backYoot = random.Next(0, 9) >= 5 ? 1 : 0;
-			yoots.yoot1 = random.Next(0, 9) >= 5 ? 1 : 0;
-			yoots.yoot2 = random.Next(0, 9) >= 5 ? 1 : 0;
-			yoots.yoot3 = random.Next(0, 9) >= 5 ? 1 : 0;
+			yoots.backYoot = random.Next(0, 10) >= 5 ? 1 : 0;
+			yoots.yoot1 = random.Next(0, 10) >= 5 ? 1 : 0;
+			yoots.yoot2 = random.Next(0, 10) >= 5 ? 1 : 0;
+			yoots.yoot3 = random.Next(0, 10) >= 5 ? 1 : 0;
 
 			return yoots;
 		} // 윷 던지기
+
+		public static int GetValidSeed()
+		{
+			int seed;
+			bool isValidSeed;
+
+			do
+			{
+				AnounceLocate();
+				isValidSeed = int.TryParse(Console.ReadLine(), out seed);
+
+				if (isValidSeed)
+				{
+					if (seed < 1 || seed > 10)
+					{
+						Console.WriteLine("잘못된 입력입니다. 1에서 10 사이의 숫자를 입력해주세요.");
+							isValidSeed = false;
+					}
+				}
+				else
+					Console.WriteLine("잘못된 입력입니다. 1에서 10 사이의 숫자를 입력해주세요.");
+
+			} while (!isValidSeed);
+
+			return seed;
+		}
+
 		public static int Rolling(Player player)
 		{
-			AnounceLocate();
-			int seed = int.Parse(Console.ReadLine());
+			int seed = GetValidSeed();
 
 			Yoots yoots = RollYoots(seed);
 
@@ -202,19 +274,24 @@ namespace TigerHunter
 				switch (sum)
 				{
 					case 0:
-						Console.WriteLine("    윷!\n\n    네칸 이동합니다.");
+						Console.WriteLine("\n    윷!\n");
+						Strings.AnounceGo(sum);
 						return 4;
 					case 1:
-						Console.WriteLine("    도\n\n    한칸 이동합니다.");
+						Console.WriteLine("\n    도\n");
+						Strings.AnounceGo(sum);
 						return 1;
 					case 2:
-						Console.WriteLine("    개!\n\n    두칸 이동합니다.");
+						Console.WriteLine("\n    개!\n");
+						Strings.AnounceGo(sum);
 						return 2;
 					case 3:
-						Console.WriteLine("    걸!\n\n    세칸 이동합니다.");
+						Console.WriteLine("\n    걸!\n");
+						Strings.AnounceGo(sum);
 						return 3;
 					case 4:
-						Console.WriteLine("    모...!!\n\n    다섯칸 이동합니다.");
+						Console.WriteLine("\n    모...!!\n");
+						Strings.AnounceGo(sum);
 						return 5;
 					default:
 						return 0;
